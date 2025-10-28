@@ -1,0 +1,45 @@
+The definitions and distinctions between infrastructure layer, application layer, and domain layer generally align as follows:
+	•	Infrastructure Layer: Provides technical services like database access, network, file system, external service communication, caching, authentication, and other system-level utilities.
+	•	Application Layer: Handles application-specific use cases, workflows, business process flow orchestration, user request processing, coordination between domain operations, and may interface with external services but does not contain core business rules.
+	•	Domain Layer: Contains the core business logic, rules, and entities. This layer encapsulates the domain knowledge and processing algorithms that define the business behavior.
+Using these definitions, I will classify your list of functions/endpoints into a table by their likely layer, based on their name and presumed responsibility.
+
+
+Function Name,Layer,Reasoning
+pcs_to_mulaw,Infrastructure,Audio data format conversion is a technical utility function
+get_azure_client,Infrastructure,Setup of Azure client for external service interaction
+save_twilio_audio_chunk,Infrastructure,Saving audio chunks likely involves file or cloud storage handling
+fix_base64_padding,Infrastructure,String/base64 manipulation, a technical utility
+process_audio_chunk,Application,Processing audio data likely part of business workflow
+connect_to_gpt4o,Application,Connecting to GPT, a service orchestration function
+connect_to_gpt40_Agent,Application,Connecting agent to GPT, orchestration/service function
+handle_vad_chunk,Application,Handling voice activity detection chunk, part of audio processing flow
+listen_to_gpt4o,Application,Listening to GPT stream, orchestration
+listen_to_gpt4o_Agent,Application,Listening to GPT agent stream, orchestration
+handle_speech_started_event,Application,Event handling for speech starting
+send_transfer_call_msg,Application,Sending a call transfer message, part of business flow
+send_mark,Application,Sending marks/annotations, business logic
+save_audio_in_azureblob,Infrastructure,Saving audio to Azure Blob storage
+media_stream,Application,Websocket handling of media streaming, business logic level
+convert_pem_to_mulaw,Infrastructure,Media format conversion, technical utility
+send_audio_in_chunks,Infrastructure/Application,Sending audio data chunks, borderline between infra and app
+initiate_outbout_call,Application,API endpoint initiating outbound call, business logic
+status_callback,Application,API callback handling, business flow
+handle_incoming_call,Application,API handling incoming call, business logic
+format_client_data_json,Domain,Formatting client-specific data, domain logic
+handle_incoming_call,Application,Duplicate function name, same as above
+process_request,Application,Processing config update request, business logic
+save_to_xml,Infrastructure,Saving data to XML file, technical persistence layer
+load_from_xml,Infrastructure,Loading config from XML, technical layer
+get_config,Application,API getting config info, orchestration
+process_agent_voice_speed,Application,Processing voice speed request, domain/application logic
+process_gpt_temperature,Application,Processing GPT temperature parameter, application logic
+transcription_feed,Application,Real-time transcription websocket, business logic
+transcription_feed,Application,Another transcription websocket, application logic
+process_live_mulaw_chunk_agent,Application,Processing live audio chunk for agent, application logic
+broadcast_transcription,Application,Broadcasting transcription data, business logic
+validation_exception_handler,Infrastructure,Exception handling middleware, infrastructure layer
+zendesk_ticket_creation,Application,Creating Zendesk ticket, integration and business workflow
+zendesk_ticket_creation,Application,Same as above
+play_audio,Infrastructure/Application,Playing audio, could be both infrastructure or application
+handle_ivr_media_stream,Application,Websocket for IVR media streams, business/application logic
