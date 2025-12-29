@@ -1,0 +1,35 @@
+Create an end-to-end system for dynamic tool creation and management in a virtual agent environment.
+
+Goals:
+- Build a modular framework with UI forms, database integration, and API connectivity.
+- Enable agents to dynamically generate and invoke tools defined in the database.
+
+Requirements:
+1. **UI Layer**
+   - Provide a web form that captures tool parameters and configurations.
+   - Save form inputs as JSON structures in the database.
+   - Support CRUD operations for tools.
+
+2. **Database Layer**
+   - Design tables for:
+     - `tools` (id, name, description, method [GET/POST], endpoint_url, headers_json, params_json, created_at)
+     - `agents_tools` (agent_id, tool_id) — mapping between agents and tools
+     - `tool_params` (tool_id, param_name, type, required [bool], default_value)
+     - `audit_logs` (tool_id, action, timestamp) — to track CRUD operations
+   - Add indexes on agent_id and method for fast retrieval.
+   - Include a `samples` JSON field to store example payloads for testing (e.g. {"query": "search", "filters": {}}).
+
+3. **Backend Logic**
+   - On tool creation, generate metadata from JSON (description, parameters, endpoint, etc.).
+   - Auto-generate function definitions that the LLM can call.
+   - Support dynamic function invocation using stored tool configurations.
+   - Retrieve headers and parameters from DB (e.g. {"Authorization": "Bearer token"}) and append during runtime.
+
+4. **Validation & Scalability**
+   - Implement schema validation for all JSON entries to prevent malformed tools.
+   - Prioritize system design documentation, workflow diagrams, and JSON schema definitions before coding.
+
+Next Steps:
+- Define JSON schemas for tools and tool parameters.
+- Document workflow layers (UI → DB → LLM binding).
+- Research dynamic function calling with LLMs or APIs.
