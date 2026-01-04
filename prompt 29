@@ -1,3 +1,31 @@
+Develop a comprehensive MCP-based framework for dynamic tool generation, storage, and invocation in AI agent systems. This enables virtual agents to autonomously create, manage, and execute tools from a centralized database via APIs. [1][2][3]
+
+## Core Objectives
+Construct an MCP server integrated with a database and RESTful API to handle JSON-stored tool configurations, including dynamic function auto-generation for LLM binding. Agents query the database at runtime to discover, retrieve, and invoke tools by injecting headers, parameters, and payloads dynamically. [4][5][6] Support example payloads in a `samples` JSON field for validation and testing, such as `{"query": "search", "filters": {}}`. [7]
+
+## Database Schema
+Design a `tools` table with fields: `id` (primary key), `name` (unique string), `description` (text for LLM tool discovery), `method` (GET/POST enum), `endpoint_url` (string), `headers_json` (JSON for auth/headers), `params_json` (JSON for query/body), `samples` (JSON array of test payloads), `created_at` (timestamp). [8][7] Include JSON schemas for tool parameters to enforce validation during CRUD operations. Extend with indexes on `name` and `method` for fast agent lookups. [9]
+
+## Key Features
+- **Dynamic Invocation**: MCP server fetches tool configs from DB, auto-generates OpenAPI/MCP-compatible function schemas, and proxies calls with runtime header/params injection. [2][6]
+- **Auto-Generation**: On tool creation/update, generate LLM-callable functions using stored JSON; support MCP notifications for runtime tool list changes. [10][4]
+- **CRUD APIs**: Expose endpoints for creating/editing tools via UI forms that serialize to JSON; include testing via `samples`. [3]
+
+## Workflow Layers
+UI layer submits forms → API persists to DB → MCP server lists/generates tools → LLM in agent binds and invokes dynamically. Diagram flow: User creates tool → DB insert → MCP /tools/list → Agent tool call → Proxy to endpoint with JSON params. [5][11] Leverage frameworks like FastAPI for MCP server and SQLAlchemy for DB. [12][13]
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------
 Create an end-to-end system for dynamic tool creation and management in a virtual agent environment.
 
 Goals:
