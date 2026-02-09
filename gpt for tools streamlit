@@ -1,0 +1,85 @@
+
+I have two CSV files:
+
+1. Tool Configuration CSV
+This file contains the list of available tools along with their corresponding API endpoints and the required parameters for each tool.
+
+
+2. Customer Access CSV
+This file contains unique customer IDs and maps each customer to the set of tools they are authorized to access. A customer may have access to one or multiple tools.
+
+
+
+Functional Requirements
+
+Tool access must be strictly enforced based on the customer access CSV.
+A customer must not be allowed to invoke any tool that is not explicitly assigned to their customer ID.
+
+For every valid request:
+
+Construct the API request dynamically using:
+
+The API endpoint URL
+
+Required parameters defined in the tool configuration CSV
+
+Payload values extracted from the LLM conversation (via Streamlit prompt input)
+
+
+The request must be sent in the correct API URL / payload format as defined in the CSV.
+
+
+
+Constraints
+
+Do not assume, invent, or create new tools or API endpoints.
+
+Do not hardcode:
+
+Tool names
+
+API endpoints
+
+Parameters
+
+Customer IDs
+
+Access rules
+
+
+
+All configurations must be driven entirely by the CSV files.
+
+Dynamic Behavior
+
+The system must support dynamic updates:
+
+Any change to customer IDs or tool access in the customer access CSV
+
+Any change to tool definitions or parameters in the tool configuration CSV
+should be reflected immediately in the application behavior without requiring code changes or redeployment.
+
+
+
+Authentication and Response Control
+
+Customer ID authentication and authorization must occur before:
+
+Tool selection
+
+API request construction
+
+Sending any response during the conversation
+
+
+The application should return a response only after:
+
+The customer ID is validated
+
+Tool access is verified
+
+The requested tool is confirmed to be authorized for that customer
+
+
+
+
