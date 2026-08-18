@@ -1,0 +1,217 @@
+Request
+
+Give me a carefully researched and structured development plan for building the following application. Do not rush into implementation. I want to micro-plan the project first and then build it step by step.
+
+Product concept
+
+I want to build a Quran reading and recitation assistance app, tentatively called “Ustad” or something similar.
+
+The app should work like a combination of a Quran teacher and karaoke-style recitation interface:
+
+* The user sees the Quran on screen.
+* As the user recites, the app should follow their recitation in real time.
+* The word currently being recited should be highlighted/traced.
+* If the user recites a word incorrectly, the app should identify and highlight the error.
+* It should detect:
+    * Incorrect words
+    * Incorrect pronunciation
+    * Skipped words
+    * Extra words
+    * Words recited out of sequence
+* The UI should clearly show where the user is in the Ayah.
+* The experience should feel natural and responsive, similar to karaoke, but function like a Quranic teacher.
+
+Critical technical challenge
+
+I have attempted to build something similar before.
+
+My biggest problems were:
+
+1. Recitation tracking was unreliable — the highlighted word would not follow the user’s actual recitation correctly.
+2. False positives/false errors — the system would incorrectly mark correct recitation as wrong.
+3. Repeated words or Ayahs — when the same word or phrase appears multiple times, the system could lose track of where the user actually is.
+
+These are the most important problems to solve.
+
+The system should only track the Quranic words that are currently visible/on screen.
+
+If a word, phrase, or Ayah appears multiple times, the system must not assume which occurrence the user is reciting until there is sufficient confidence from the audio/alignment/context.
+
+Accuracy and robust alignment are more important than simply making the application appear to work.
+
+Audio and Quran requirements
+
+The target audience is primarily India and Pakistan, so choose the appropriate:
+
+* Arabic Quran script
+* Quran text source
+* Unicode representation
+* Diacritics handling
+* Arabic normalization strategy
+* Speech/audio processing approach
+* ASR model
+* Pronunciation/alignment model
+
+The system must preserve the Quranic text accurately and should not modify the displayed Quran text merely to make speech recognition easier.
+
+I also want a feature where the user can tap/click the marker at the end of an Ayah and listen to that Ayah being recited by a professional Qari.
+
+The professional recitation should be synchronized with the displayed Ayah.
+
+Technology requirements
+
+I have an Intel-based Mac.
+
+I have very limited/no technical knowledge, so the entire development workflow needs to be designed around this constraint.
+
+Whenever possible:
+
+* Automate setup.
+* Automate installation.
+* Automate configuration.
+* Provide scripts that I can run by double-clicking files.
+* Avoid requiring me to manually execute complicated terminal commands.
+* Make development, testing, deployment, and troubleshooting as automated as reasonably possible.
+
+I want the project pushed to Git.
+
+I want to host the application privately online so that I can access and test it from mobile devices.
+
+The final product should primarily be designed for mobile users.
+
+Models and APIs
+
+Use open-source models wherever practical.
+
+If an external API is genuinely necessary, tell me:
+
+* Which API is required
+* Why it is required
+* Estimated cost
+* Whether there is a free/cheap alternative
+* Whether it introduces privacy or latency concerns
+* Whether it can eventually be replaced with an open-source model
+
+Keep the project economical and cost-effective.
+
+Do not choose an expensive model simply because it is easier to integrate.
+
+Architecture
+
+I want you to carefully evaluate the best architecture for:
+
+* Mobile UI
+* Quran rendering
+* Microphone/audio capture
+* Audio streaming
+* Voice activity detection
+* ASR
+* Forced alignment / phoneme alignment
+* Word-level alignment
+* Pronunciation evaluation
+* Error detection
+* Recitation tracking
+* Handling skipped/extra/repeated words
+* Confidence scoring
+* Real-time feedback
+* Professional Qari playback
+* Backend processing
+* Database/storage
+* Authentication if required
+* Private hosting
+* Logging and debugging
+
+Pay particular attention to latency and real-time word tracking.
+
+Do not use browser-side speech recognition if a better architecture is available. Evaluate whether audio should be captured in the browser/mobile client and streamed to the backend for processing.
+
+Accuracy requirements
+
+The application should not aggressively mark a user as wrong when the system is uncertain.
+
+I would prefer a system that says “uncertain — continue listening” rather than incorrectly marking a correct recitation as wrong.
+
+Design a confidence-based system where appropriate.
+
+The system should distinguish between:
+
+* Definitely correct
+* Probably correct
+* Uncertain
+* Probably incorrect
+* Definitely incorrect
+
+Research the best technical approach for Quran recitation specifically rather than assuming that a generic speech-to-text pipeline will be sufficient.
+
+Consider whether a combination of ASR + forced alignment + phoneme-level analysis + Quran-specific rules would provide better results than relying on a single LLM or ASR model.
+
+Development methodology
+
+Do not immediately start coding.
+
+First:
+
+1. Understand the complete product requirements.
+2. Research the available open-source models and datasets.
+3. Compare the viable technical architectures.
+4. Identify the hardest technical problems.
+5. Determine what should be proven with a prototype before building the full application.
+6. Identify risks and likely failure points.
+7. Select versions of frameworks, libraries, models, and runtimes that are appropriate for my Intel Mac and eventual deployment environment.
+8. Create a phased implementation plan.
+9. Define clear acceptance criteria for each phase.
+10. Only then begin implementation.
+
+I want the project micro-planned, but do not get lost in unnecessary micro-planning.
+
+The goal is to build the best practical version, not endlessly plan.
+
+At every major decision point, if there are multiple technically reasonable options, research them first and then ask for my opinion before committing.
+
+If you need information from me, ask specific questions rather than making assumptions.
+
+Important constraints
+
+* Do not invent APIs, Quran data sources, models, or libraries.
+* Do not blindly follow a popular architecture if it is unsuitable for this application.
+* Do not over-engineer unnecessarily.
+* Do not prioritize speed of development over recitation accuracy.
+* Do not use an LLM as a substitute for deterministic audio alignment where a specialized audio model/algorithm would be more appropriate.
+* Do not assume that normal Arabic ASR accuracy is sufficient for Quran recitation evaluation.
+* Treat repeated words, repeated phrases, and similar Ayahs as a major alignment problem.
+* Only evaluate/track the Quran text that is currently visible to the user.
+* Preserve the exact Quranic text and ordering.
+* Design the system so that individual components can later be replaced with better models.
+
+First deliverable
+
+For now, do not build the application.
+
+Give me a comprehensive but practical technical/product development plan, including:
+
+1. Recommended overall architecture
+2. Recommended technology stack
+3. Best open-source models to evaluate
+4. Recommended Quran text/script source
+5. Recommended professional recitation/audio source
+6. Audio pipeline
+7. Real-time tracking/alignment strategy
+8. Pronunciation/error detection strategy
+9. Strategy for repeated words and Ayahs
+10. Mobile/web architecture
+11. Backend architecture
+12. Hosting options and approximate costs
+13. Git/project structure
+14. Automated setup strategy for my Intel Mac
+15. Development phases
+16. Prototype/PoC milestones
+17. Testing strategy
+18. Accuracy benchmarks
+19. Major risks and mitigation strategies
+20. Which components should be built first
+21. Which components should remain replaceable
+22. APIs/keys that may be required
+23. Estimated development and infrastructure costs
+24. Recommended first milestone
+
+Most importantly, explain how you would solve the recitation-tracking problem, because that has been the main failure point in my previous implementations.
